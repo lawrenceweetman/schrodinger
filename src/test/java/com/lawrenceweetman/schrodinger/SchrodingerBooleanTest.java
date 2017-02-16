@@ -102,19 +102,19 @@ public class SchrodingerBooleanTest {
     }
 
     @Test
-    public void unsetDoesntEqualSetToTrue() throws Exception {
+    public void unsetEqualsSetToTrue() throws Exception {
         SchrodingerBoolean unsetSchrodingerBoolean = new SchrodingerBoolean();
         SchrodingerBoolean trueSchrodingerBoolean = new SchrodingerBoolean();
         trueSchrodingerBoolean.set(true);
-        assertFalse(unsetSchrodingerBoolean.equals(trueSchrodingerBoolean));
+        assertTrue(unsetSchrodingerBoolean.equals(trueSchrodingerBoolean));
     }
 
     @Test
-    public void unsetDoesntEqualSetToFalse() throws Exception {
+    public void unsetEqualsSetToFalse() throws Exception {
         SchrodingerBoolean unsetSchrodingerBoolean = new SchrodingerBoolean();
         SchrodingerBoolean falseSchrodingerBoolean = new SchrodingerBoolean();
         falseSchrodingerBoolean.set(false);
-        assertFalse(unsetSchrodingerBoolean.equals(falseSchrodingerBoolean));
+        assertTrue(unsetSchrodingerBoolean.equals(falseSchrodingerBoolean));
     }
 
     @Test
@@ -145,13 +145,34 @@ public class SchrodingerBooleanTest {
     }
 
     @Test
-    public void staticClosedDoesntEqualStaticTrue() throws Exception {
-        assertFalse(SchrodingerBoolean.CLOSED.equals(SchrodingerBoolean.TRUE));
+    public void unsetEqualsArbitraryObject() throws Exception {
+        SchrodingerBoolean schrodingerBoolean = new SchrodingerBoolean();
+        assertTrue(schrodingerBoolean.equals(new UnsupportedClassVersionError()));
     }
 
     @Test
-    public void staticClosedDoesntEqualStaticFalse() throws Exception {
-        assertFalse(SchrodingerBoolean.CLOSED.equals(SchrodingerBoolean.FALSE));
+    public void trueDoesntEqualArbitraryObject() throws Exception {
+        SchrodingerBoolean schrodingerBoolean = new SchrodingerBoolean();
+        schrodingerBoolean.set(true);
+        assertFalse(schrodingerBoolean.equals(new UnsupportedClassVersionError()));
+    }
+
+
+    @Test
+    public void falseDoesntEqualArbitraryObject() throws Exception {
+        SchrodingerBoolean schrodingerBoolean = new SchrodingerBoolean();
+        schrodingerBoolean.set(false);
+        assertFalse(schrodingerBoolean.equals(new UnsupportedClassVersionError()));
+    }
+
+    @Test
+    public void staticClosedEqualsStaticTrue() throws Exception {
+        assertTrue(SchrodingerBoolean.CLOSED.equals(SchrodingerBoolean.TRUE));
+    }
+
+    @Test
+    public void staticClosedEqualsStaticFalse() throws Exception {
+        assertTrue(SchrodingerBoolean.CLOSED.equals(SchrodingerBoolean.FALSE));
     }
 
     @Test
@@ -165,22 +186,22 @@ public class SchrodingerBooleanTest {
     }
 
     @Test
-    public void staticClosedDoesntEqualCreatedTrue() throws Exception {
+    public void staticClosedEqualsCreatedTrue() throws Exception {
         SchrodingerBoolean schrodingerBoolean = new SchrodingerBoolean();
         schrodingerBoolean.set(true);
-        assertFalse(SchrodingerBoolean.CLOSED.equals(schrodingerBoolean));
+        assertTrue(SchrodingerBoolean.CLOSED.equals(schrodingerBoolean));
     }
 
     @Test
-    public void staticClosedDoesntEqualCreatedFalse() throws Exception {
+    public void staticClosedEqualsCreatedFalse() throws Exception {
         SchrodingerBoolean schrodingerBoolean = new SchrodingerBoolean();
         schrodingerBoolean.set(false);
-        assertFalse(SchrodingerBoolean.CLOSED.equals(schrodingerBoolean));
+        assertTrue(SchrodingerBoolean.CLOSED.equals(schrodingerBoolean));
     }
 
     @Test
-    public void staticTrueDoesntEqualCreatedUnset() throws Exception {
-        assertFalse(SchrodingerBoolean.TRUE.equals(new SchrodingerBoolean()));
+    public void staticTrueEqualsCreatedUnset() throws Exception {
+        assertTrue(SchrodingerBoolean.TRUE.equals(new SchrodingerBoolean()));
     }
 
     @Test
@@ -198,8 +219,8 @@ public class SchrodingerBooleanTest {
     }
 
     @Test
-    public void staticFalseDoesntEqualCreatedUnset() throws Exception {
-        assertFalse(SchrodingerBoolean.FALSE.equals(new SchrodingerBoolean()));
+    public void staticFalseEqualsCreatedUnset() throws Exception {
+        assertTrue(SchrodingerBoolean.FALSE.equals(new SchrodingerBoolean()));
     }
 
     @Test
@@ -214,6 +235,11 @@ public class SchrodingerBooleanTest {
         SchrodingerBoolean schrodingerBoolean = new SchrodingerBoolean();
         schrodingerBoolean.set(false);
         assertTrue(SchrodingerBoolean.FALSE.equals(schrodingerBoolean));
+    }
+
+    @Test
+    public void iWant100PercentCoverage() throws Exception {
+        new SchrodingerBoolean().hashCode();
     }
 
 }

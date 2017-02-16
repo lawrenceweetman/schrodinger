@@ -28,18 +28,24 @@ public class SchrodingerBoolean {
         return value.orElse(b).equals(b);
     }
 
+    public boolean is(SchrodingerBoolean schrodingerBoolean) {
+        return !value.isPresent() || schrodingerBoolean.is(value.get());
+    }
+
+    public boolean is(Object o) {
+        return !value.isPresent() || value.get().equals(o);
+    }
+
     public void set(boolean b) {
         value = Optional.of(b);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SchrodingerBoolean that = (SchrodingerBoolean) o;
-
-        return value != null ? value.equals(that.value) : that.value == null;
+        if(o instanceof SchrodingerBoolean) {
+            return is((SchrodingerBoolean) o);
+        }
+        return !value.isPresent() || this == o || o != null && is(o);
     }
 
     @Override
