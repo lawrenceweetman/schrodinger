@@ -1,0 +1,19 @@
+engines:
+  checkstyle:
+    enabled: true
+    channel: beta
+    exclude_fingerprints:
+    - e06e85b982b881aa393a0071a2e69147
+    - c245070a74501e0f456f5142466d33a7
+    - 1980d4756ede175d3072beac59137a71
+    - 054e0bcf847bcdc0d2261b97e0ad764b
+    - f840f87a78e0b072e534ad62ed5ed68a
+  fixme:
+    enabled: true
+  pmd:
+    enabled: true
+    channel: beta
+ratings:
+  paths:
+  - "**.java"
+exclude_paths: []
